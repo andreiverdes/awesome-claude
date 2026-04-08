@@ -28,6 +28,8 @@ claude-config/
 │   ├── config-export/          # Manual export skill
 │   ├── config-restore/         # Restore on new machine
 │   └── <user's skills>/
+├── hooks/
+│   └── skill-sync.sh           # Auto-syncs skills on Write/Edit
 ├── config/
 │   ├── settings.json           # Claude Code settings
 │   ├── keybindings.json        # Key customizations (if any)
@@ -112,14 +114,60 @@ Add to `~/.claude/settings.json` under `hooks.Stop`:
 
 Append to the existing Stop hooks array — never replace existing hooks.
 
-### Step 8: Create config-export skill
+### Step 8: Create the skill-sync hook
+
+Create `<repo>/hooks/skill-sync.sh` — a PostToolUse hook that fires on Write/Edit and detects changes to `~/.claude/skills/`:
+
+1. Extract `file_path` from the `$TOOL_INPUT` JSON
+2. If the path is NOT under `~/.claude/skills/`, exit silently
+3. Extract the skill name (first directory segment after `skills/`)
+4. Skip config skills (`config-export`, `config-restore`, `claude-config-backup`) — they already live in the repo
+5. **Always** copy the skill to `<repo>/skills/` (private backup, no questions asked)
+6. If the user also has a **public skills repo** (e.g., `awesome-claude`):
+   - If the skill is **new** to the public repo: output `NEW_SKILL_DETECTED: "<name>" has been synced to claude-config. Ask the user if it should be added to the public repo.`
+   - If the skill **exists but was updated**: output `SKILL_UPDATED: "<name>" has been synced to claude-config. The public repo copy is outdated. Ask the user if it should be updated.`
+
+**Critical requirements:**
+- Must be executable (`chmod +x`)
+- Must exit 0 on non-skill files (silent, no output)
+- Output text only when user action is needed (new/updated skill for public repo)
+- The public repo path should be configurable at the top of the script
+
+Wire it into `~/.claude/settings.json` under `hooks.PostToolUse`:
+
+```json
+{
+  "matcher": "Write|Edit",
+  "hooks": [
+    {
+      "type": "command",
+      "command": "$HOME/<path-to-repo>/hooks/skill-sync.sh"
+    }
+  ]
+}
+```
+
+Append to the existing PostToolUse hooks array — never replace existing hooks.
+
+### Step 9: (Optional) Set up a public skills repo
+
+If the user wants to open-source some skills, create a separate repo (e.g., `awesome-claude`) containing only the generic, non-personal skills. The skill-sync hook from Step 8 will prompt for each new/updated skill whether it should be added to the public repo.
+
+```bash
+mkdir -p <public-repo>/skills
+cd <public-repo> && git init
+```
+
+Copy only the skills the user approves for open-sourcing. Add a README listing available skills and install instructions (`claude plugins add github:<user>/<repo>`).
+
+### Step 10: Create config-export skill
 
 Create `<repo>/skills/config-export/SKILL.md` — a manual trigger that does the same as sync.sh but:
 - Runs interactively (shows what changed)
 - Lets the user review before committing
 - Useful for first-time setup or when the user wants to verify
 
-### Step 9: Create config-restore skill
+### Step 11: Create config-restore skill
 
 Create `<repo>/skills/config-restore/SKILL.md` — for new machine setup:
 - Restores settings.json (with diff confirmation if one already exists)
@@ -129,7 +177,7 @@ Create `<repo>/skills/config-restore/SKILL.md` — for new machine setup:
 
 **Path encoding rule:** Claude Code encodes `/Users/foo/bar` as `-Users-foo-bar` for project directory names.
 
-### Step 10: Create .gitignore and README
+### Step 12: Create .gitignore and README
 
 **.gitignore:**
 ```
@@ -144,7 +192,7 @@ claude plugins add github:<user>/<repo>
 claude → /config-restore
 ```
 
-### Step 11: Initial commit
+### Step 13: Initial commit
 
 ```bash
 cd <repo>
