@@ -36,9 +36,10 @@ All skills become available immediately.
 
 | Skill | Description |
 |-------|-------------|
-| `/claude-config-backup` | Set up a portable, auto-syncing backup of your Claude Code configuration (skills, settings, memories) as a GitHub repo. |
-| `/config-export` | Manually snapshot your current Claude Code config to the backup repo. |
-| `/config-restore` | Restore Claude Code config on a new machine with interactive path remapping. |
+| `/claude-config-backup` | Turn `~/.claude` into a git repo with auto-sync. Full setup guide for portable config across machines. |
+| `/config-push` | Commit and push current config changes to remote. |
+| `/config-pull` | Pull config changes from remote (from another machine). |
+| `/config-sync` | Bidirectional sync: commit local + pull remote + rebase + push. |
 
 ## Contributing
 
