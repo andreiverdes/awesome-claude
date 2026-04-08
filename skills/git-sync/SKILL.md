@@ -3,7 +3,7 @@ name: git-sync
 description: Use when the user wants to set up portable Claude Code configuration — turning ~/.claude into a git repo that auto-syncs settings, skills, and memories across machines. Triggers on backing up claude config, syncing settings, new machine setup, dotfiles for claude, portable configuration.
 ---
 
-# Dotfiles
+# Git Sync
 
 Turn `~/.claude` into a git repo that auto-syncs your configuration across machines.
 
