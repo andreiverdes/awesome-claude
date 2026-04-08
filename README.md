@@ -36,10 +36,8 @@ All skills become available immediately.
 
 | Skill | Description |
 |-------|-------------|
-| `/claude-config-backup` | Turn `~/.claude` into a git repo with auto-sync. Full setup guide for portable config across machines. |
-| `/config-push` | Commit and push current config changes to remote. |
-| `/config-pull` | Pull config changes from remote (from another machine). |
-| `/config-sync` | Bidirectional sync: commit local + pull remote + rebase + push. |
+| `/git-sync-setup` | Turn `~/.claude` into a git repo with auto-sync. Full setup guide for portable config across machines. |
+| `/sync` | One command to sync config: commit local + pull remote + rebase + push. |
 
 ## Contributing
 
