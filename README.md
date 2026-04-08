@@ -36,7 +36,7 @@ All skills become available immediately.
 
 | Skill | Description |
 |-------|-------------|
-| `/git-sync-setup` | Turn `~/.claude` into a git repo with auto-sync. Full setup guide for portable config across machines. |
+| `/git-sync` | Turn `~/.claude` into a git repo with auto-sync. Full setup guide for portable config across machines. |
 | `/sync` | One command to sync config: commit local + pull remote + rebase + push. |
 
 ## Contributing
