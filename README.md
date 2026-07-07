@@ -18,6 +18,8 @@ All skills become available immediately.
 |-------|-------------|
 | `/fable` | An operating manual for reasoning, written by Claude Fable 5 as a handoff of craft to successor models: eight procedures that replace the feeling of being right with checks, a five-question pre-send self-test, and a calibration layer measured (not assumed) against a frozen gold set — Opus 4.8 baselined at parity on single-turn hard tasks, with three measured compensations for the gaps that did appear. |
 
+Rather grow your own than use this one? [`skills/fable/PROMPT.md`](skills/fable/PROMPT.md) is the reproducible prompt kit that produced this skill — run it against whatever strong model you have, calibrated to whatever model you keep.
+
 ### App Development
 
 | Skill | Description |
