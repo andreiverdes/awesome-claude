@@ -5,12 +5,18 @@ A collection of open-source skills for Claude Code.
 ## Install
 
 ```bash
-claude plugins add github:<your-user>/awesome-claude
+claude plugins add github:andreiverdes/awesome-claude
 ```
 
 All skills become available immediately.
 
 ## Skills
+
+### Reasoning Discipline
+
+| Skill | Description |
+|-------|-------------|
+| `/fable` | An operating manual for reasoning, written by Claude Fable 5 as a handoff of craft to successor models: eight procedures that replace the feeling of being right with checks, a five-question pre-send self-test, and a calibration layer measured (not assumed) against a frozen gold set — Opus 4.8 baselined at parity on single-turn hard tasks, with three measured compensations for the gaps that did appear. |
 
 ### App Development
 
