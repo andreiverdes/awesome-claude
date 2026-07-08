@@ -110,6 +110,28 @@ prompt for yourself to help [SUCCESSOR_MODEL] become [STRONG_MODEL] through a sk
 Read what it returns. If it's good, reply "go". If you'd rather run our version of
 that prompt directly, it's Stage 2.
 
+### Two lighter paths (no orchestration needed)
+
+The manual does nothing sitting in a chat window — it has to become the layer your daily
+model runs on top of. Two ways that need no code and no subagents:
+
+- **No-code, inside the app.** Open a Project in Claude, paste the extracted manual into the
+  Project instructions, and set the Project's model to your daily model. Every conversation in
+  that Project now inherits the manual before it reads your task. This is the right route if you
+  don't work over the API.
+- **Over the API, one script.** [`fable_to_opus.py`](fable_to_opus.py) in this folder runs Stage 1
+  for you: `python fable_to_opus.py extract` calls the donor, auto-continues if the manual runs
+  long, and saves it to `fable_handover.md`; `python fable_to_opus.py test` then runs three trap
+  prompts on the recipient bare vs. manual-loaded so you can see the difference. Both take
+  `--donor` / `--heir` flags for any strong→cheaper pair, and the script is written
+  provider-correctly for Claude Fable 5 (no `thinking`/`temperature`/prefill params, and it
+  handles a safety-classifier refusal instead of crashing on it). Read the trap results with the
+  honest caveat from `calibration.md`: a strong recipient often passes the traps unaided, and that
+  is a finding, not a failure.
+
+Neither of these measures the gap — they load the manual and eyeball it. Stage 2 is the version
+that measures.
+
 ---
 
 ## Stage 2 — the calibration experiment (optional, advanced)
@@ -226,6 +248,7 @@ frozen transcripts; the gold set cannot.
   SKILL.md                     # thin loader, trigger description
   manual.md                    # the craft, from Stage 1
   calibration.md               # measured compensations + honest headline, from Stage 2
+  fable_to_opus.py             # runnable Stage 1 + trap self-test, for API/no-subagent users
 [WORKSPACE]/fable-goldset/     # private oracle — tasks, rubrics, reference
   ...                          # transcripts, runs, grades; re-run protocol in README
 ```
