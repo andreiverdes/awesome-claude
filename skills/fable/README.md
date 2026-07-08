@@ -17,7 +17,7 @@ In practice it nudges the AI to:
 - say plainly what it knows versus what it is guessing;
 - not call something "done" without showing how it checked.
 
-Honest version: a strong model already does much of this on its own — in our testing the difference
+Honest version: a strong model already does much of this on its own — in testing, the difference
 was small. So treat `/fable` as consistency-and-honesty insurance, not as a way to make a weak model
 smart. You can install it (below), or with no setup at all paste [`manual.md`](manual.md) into a
 Claude Project and pick your model.
@@ -95,6 +95,75 @@ often passes the traps unaided, and that is a finding, not a failure.
 Full, measured path — [`PROMPT.md`](PROMPT.md) is the two-stage kit. Stage 1 commissions the manual;
 Stage 2 is the calibration experiment (frozen gold set, reference and baseline runs, grading) that
 turns "assumed" compensations into measured ones.
+
+## How it was tested and results
+
+The calibration in this skill is a measurement, not a claim. The setup and the result follow.
+
+### How it was tested
+
+A set of four hard, self-contained tasks were used, each paired with a grading rubric and a known
+answer written before any model saw it:
+
+- a concurrency-and-correctness review of real code (find every defect);
+- a protocol reverse-engineering task from a captured trace, with an exact, generated ground truth;
+- a systems-design task under ten hard constraints, with a deadlock trap planted where two of the
+  constraints collide;
+- a multi-hop incident diagnosis with one real root cause and three plausible decoys planted to
+  mislead.
+
+Each task was run three ways, each in a fresh context with no memory of the others: Claude Fable 5
+(the reference answer), Claude Opus 4.8 with no skill (the baseline), and Opus 4.8 with this skill's
+manual loaded. Every run was graded blind against the frozen rubric — baselines before references,
+to avoid anchoring — and each run's identity was confirmed up front by having the model report which
+model it was before starting.
+
+### The scores
+
+| Task | Fable 5 (reference) | Opus 4.8, no skill | Opus 4.8 + /fable |
+|------|:---:|:---:|:---:|
+| Concurrency review | 23.5 | 23 | 22 |
+| Protocol inference | 25 | 25 | 25 |
+| Systems design | 25 | 25 | 25 |
+| Incident diagnosis | 25 | 25 | 25 |
+| **Total (/100)** | **98.5** | **98** | **97** |
+
+### What was found
+
+- Near-parity. On these well-specified, single-turn hard tasks, Opus 4.8 with no help scored within
+  noise of Fable 5. The large capability gap expected going in did not appear at this profile.
+  This is the headline, and it is deliberately not flattering to the skill.
+- The one real spread was on the open-ended task — "find every defect." Fable surfaced 13 issues,
+  bare Opus 7 (it covered the most severe and stopped), and Opus-with-skill 15 (the widest coverage
+  of any run). Where a task rewards not stopping early, differences show up; where a task has a
+  single clean answer, everyone reaches it.
+- Two of the clearest reasoning slips in the whole experiment were the strong model's own — Fable
+  asserted a context-dependent risk as a flat certainty, and talked itself past an inconsistency
+  that bare Opus decoded correctly. The discipline in this manual exists because these mistakes are
+  general, not because the weaker model is worse.
+- The skill did not raise the scores — with three of four tasks already at the ceiling and the rest
+  inside noise, there was no headroom to raise. What it changed, measurably, was how the answers
+  were written: every skill-loaded answer led with its verdict, labeled what it had verified versus
+  what depended on unseen context, and named the check that would confirm each uncertain claim. None
+  of the baselines did this consistently. It also broadened coverage on the open-ended hunt. Its one
+  measurable cost: with a fixed length budget, more findings meant slightly shallower treatment of
+  each.
+- Three habits earned their place by showing a measured effect, and are what the calibration layer
+  keeps: sweep for one more issue after you think you are done; check for risks that depend on
+  context you cannot see; and attach the certainty label to the claim itself, not to a footnote.
+
+### What this does not measure
+
+Be skeptical in the right places. This was four tasks, one run per cell, so a gap of a point or two
+is noise, not signal. Every task was single-turn and fully specified — exactly the profile where a
+strong model needs the least help. The tests could not touch the situations where a real difference
+is most likely to live: long tasks where the thread drifts, work spread across many turns, deciding
+to check something nobody asked about, and holding discipline under time or sunk-cost pressure. Read
+the near-parity result as evidence about clean, single-shot analysis only.
+
+The task set itself stays private (it embeds real code), so it is kept as an internal regression
+check rather than published. The method is fully reproducible on your own tasks — that is what
+[`PROMPT.md`](PROMPT.md) Stage 2 is.
 
 ## The honest boundary
 
