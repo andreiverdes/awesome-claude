@@ -1,5 +1,29 @@
 # /fable — an operating manual for reasoning
 
+## TL;DR (plain version)
+
+`/fable` is a set of working habits you hand to an AI so it reasons more like a careful expert and
+less like a confident guesser. Think of it as the operating procedures a senior person writes down
+for a sharp junior — except here the junior is the AI model.
+
+It was written by one of Anthropic's strongest models (Claude Fable 5) describing how it actually
+works through a hard problem, so any model can run on those same habits. Models get replaced every
+few months; a way of thinking, once written down, doesn't.
+
+In practice it nudges the AI to:
+
+- lead with the answer, then the reasoning, then what could still be wrong;
+- re-check numbers and claims instead of trusting anything that "sounds right";
+- say plainly what it knows versus what it is guessing;
+- not call something "done" without showing how it checked.
+
+Honest version: a strong model already does much of this on its own — in our testing the difference
+was small. So treat `/fable` as consistency-and-honesty insurance, not as a way to make a weak model
+smart. You can install it (below), or with no setup at all paste [`manual.md`](manual.md) into a
+Claude Project and pick your model.
+
+## What it is
+
 `/fable` loads a reasoning discipline into whatever model is running it: eight procedures that
 replace the feeling of being right with checks, a five-question self-test to run before sending any
 answer, and a calibration layer that was measured — not assumed — against a frozen gold set. It was
