@@ -5,10 +5,12 @@ A collection of open-source skills for Claude Code.
 ## Install
 
 ```bash
-claude plugins add github:andreiverdes/awesome-claude
+claude plugins marketplace add andreiverdes/awesome-claude
+claude plugins install awesome-claude@awesome-claude
 ```
 
-All skills become available immediately.
+The skills become available in your next Claude Code session. Update later with
+`claude plugins marketplace update awesome-claude`.
 
 ## Skills
 

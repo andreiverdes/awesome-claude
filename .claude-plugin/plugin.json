@@ -1,0 +1,10 @@
+{
+  "name": "awesome-claude",
+  "description": "A collection of open-source skills for Claude Code.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Andrei Verdeș"
+  },
+  "homepage": "https://github.com/andreiverdes/awesome-claude",
+  "repository": "https://github.com/andreiverdes/awesome-claude"
+}

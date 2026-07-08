@@ -1,0 +1,19 @@
+{
+  "name": "awesome-claude",
+  "owner": {
+    "name": "Andrei Verdeș"
+  },
+  "metadata": {
+    "description": "A collection of open-source skills for Claude Code — reasoning discipline, app development, UI, IDE tooling, and config."
+  },
+  "plugins": [
+    {
+      "name": "awesome-claude",
+      "source": {
+        "source": "github",
+        "repo": "andreiverdes/awesome-claude"
+      },
+      "description": "A collection of open-source skills for Claude Code, including /fable (an operating manual for reasoning), /mobile-app-builder, /web-dev, /shadcn, /intellij-plugin, and config helpers."
+    }
+  ]
+}

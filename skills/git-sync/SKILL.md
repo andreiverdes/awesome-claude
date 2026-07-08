@@ -88,7 +88,8 @@ git push -u origin main
 
 ```bash
 git clone git@github.com:<user>/claude-config.git ~/.claude
-claude plugins add ...   # reinstall plugins
+claude plugins marketplace add <user>/<marketplace>   # re-add marketplaces...
+claude plugins install <plugin>@<marketplace>         # ...then reinstall plugins
 ```
 
 Done. Skills, settings, and memories are all in place.

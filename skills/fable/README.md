@@ -48,13 +48,15 @@ in [`calibration.md`](calibration.md).
 
 ## Use case 1 — use the pre-built skill
 
-Install the collection as a Claude Code plugin:
+Install the collection from its marketplace:
 
 ```bash
-claude plugins add github:andreiverdes/awesome-claude
+claude plugins marketplace add andreiverdes/awesome-claude
+claude plugins install awesome-claude@awesome-claude
 ```
 
-Then `/fable` activates on its own before hard or high-stakes work — the start of a difficult task,
+Then, from your next Claude Code session, `/fable` activates on its own before hard or high-stakes
+work — the start of a difficult task,
 or just before you deliver a conclusion, diagnosis, review, or claim that something is done — from
 the trigger conditions in its description. You can also invoke it directly:
 
