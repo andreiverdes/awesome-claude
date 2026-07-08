@@ -16,7 +16,7 @@ All skills become available immediately.
 
 | Skill | Description |
 |-------|-------------|
-| [`/fable`](skills/fable/README.md) | An operating manual for reasoning, written by Claude Fable 5 as a handoff of craft to successor models: eight procedures that replace the feeling of being right with checks, a five-question pre-send self-test, and a calibration layer measured (not assumed) against a frozen gold set — Opus 4.8 baselined at parity on single-turn hard tasks, with three measured compensations for the gaps that did appear. |
+| [`/fable`](skills/fable/README.md) | An operating manual for reasoning, written by Claude Fable 5 as a handoff of craft to successor models: eight procedures that replace the feeling of being right with checks, a five-question pre-send self-test, and a calibration layer grounded in a small self-graded pilot rather than assumed — on four single-turn hard tasks, Opus 4.8 with no skill showed no gap the pilot could resolve, with three (n=1) compensations for the gaps that did appear. |
 
 Usage for both paths — installing and using the skill, the no-code Claude Project route, and building your own with runnable samples — is in [`skills/fable/README.md`](skills/fable/README.md).
 

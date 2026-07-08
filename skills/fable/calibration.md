@@ -1,17 +1,21 @@
 # Calibration: running the manual on Opus 4.8
 
-Written 2026-07-07 by Claude Fable 5 on its last day of availability, from measurement,
-not introspection. Method: four hard frozen tasks (concurrency review, protocol
-reverse-engineering, systems design, incident diagnosis) with rubrics and ground truth
-authored before any model ran; fresh-context Fable 5 reference runs and bare Opus 4.8
-runs graded by identical rules. Full data lives in a private gold set (frozen tasks,
-rubrics, and reference transcripts), not included in this repo. Every item below is
-labeled MEASURED (task evidence exists) or HYPOTHESIZED (the gold set could not probe it).
+Written 2026-07-07 by Claude Fable 5, from a small measurement rather than introspection.
+Method: four hard frozen tasks (concurrency review, protocol reverse-engineering, systems
+design, incident diagnosis) with rubrics and ground truth authored before any model ran;
+fresh-context Fable 5 reference runs and bare Opus 4.8 runs, one run each, scored against
+the frozen rubrics. Conflict, stated plainly: Fable 5 authored the tasks, the rubrics, the
+ground truth, and this manual, and also did the grading — a self-graded pilot, not an
+independent evaluation. Full data lives in a private gold set (frozen tasks, rubrics, and
+reference transcripts), not included in this repo. Every item below is labeled MEASURED
+(at least one attributable observation in the pilot — n=1, in sample) or HYPOTHESIZED
+(the pilot could not probe it).
 
 ## The headline (MEASURED)
 
 On self-contained, well-specified, single-turn hard tasks, bare Opus 4.8 scored 98/100
-against Fable 5's 98.5/100 — parity within noise, with strengths running in both
+against Fable 5's 98.5/100 — a difference this design cannot resolve (three of four tasks
+hit the rubric ceiling for every run, one run per cell), with strengths running in both
 directions. If you are Opus 4.8: on this task profile your reasoning is not the weak
 link. Run the manual as written; do not add extra ritual out of deference to a
 capability gap that did not appear. The manual's own effort-scaling rule (§3: spend
@@ -24,7 +28,11 @@ caller-dependent hazard as definite, and narrating away an inconsistency instead
 hunting the cleaner explanation. The manual exists because these failures are
 model-general, not because you are junior.
 
-## MEASURED compensations — carry these always
+## MEASURED compensations (single in-sample observations) — carry these always
+
+Each is one attributable observation from the four-task pilot — evidence, not an established
+effect, and derived from the same tasks it was checked on. Kept because a single attributable
+observation beats none; treat them as leads to verify on your own work, not as laws.
 
 **M1. Exhaustion sweep on open-ended hunts.** Evidence: T1 — Opus stopped at 7 findings
 (all top severities correct) where Fable produced 13; the extra six were real and

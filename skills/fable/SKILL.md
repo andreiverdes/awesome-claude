@@ -8,10 +8,10 @@ description: Use when the user invokes /fable, at the start of any hard or high-
 ## Overview
 
 An operating discipline for reasoning: eight procedures that replace the feeling of
-being right with checks that do not care how you feel, plus a measured calibration
-layer for running them on successor models. Written by Claude Fable 5 as a handoff of
-craft; the calibration was measured against a frozen gold set
-(kept private), not assumed.
+being right with checks that do not care how you feel, plus a calibration layer for
+running them on successor models. Written by Claude Fable 5 as a handoff of craft; the
+calibration is grounded in a small, self-graded pilot (four tasks, one run each; kept
+private) rather than assumed — see calibration.md for the setup and its conflicts.
 
 ## How to use
 

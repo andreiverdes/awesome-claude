@@ -50,11 +50,13 @@ You review the prompt it returns, edit if needed, and reply "go."
 **Move 3 — execution, and what actually happened.** Worth knowing before you run it,
 because it recalibrates expectations:
 
-- Bare Opus 4.8 scored **98/100** against Fable 5's **98.5/100** on the frozen set
-  (four hard tasks: a concurrency review of real code with real verified bugs, protocol
+- Bare Opus 4.8 scored 98/100 against Fable 5's 98.5/100 on the frozen set (four hard
+  tasks: a concurrency review of real code with real verified bugs, protocol
   reverse-engineering from captures, a systems design with a planted deadlock trap, and
-  a multi-hop incident diagnosis with planted decoys). Parity, within noise, on
-  self-contained single-turn hard tasks.
+  a multi-hop incident diagnosis with planted decoys). Read that as no gap this design
+  could resolve, not proven equality — it was self-graded (Fable wrote and graded
+  everything), one run per cell, and three of the four tasks hit the rubric ceiling for
+  every model.
 - Two of the clearest calibration failures in the experiment belonged to the STRONGER
   model: it asserted a caller-dependent hazard as definite, and it narrated away an
   inconsistency the weaker model decoded correctly.
