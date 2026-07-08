@@ -18,7 +18,7 @@ All skills become available immediately.
 |-------|-------------|
 | `/fable` | An operating manual for reasoning, written by Claude Fable 5 as a handoff of craft to successor models: eight procedures that replace the feeling of being right with checks, a five-question pre-send self-test, and a calibration layer measured (not assumed) against a frozen gold set — Opus 4.8 baselined at parity on single-turn hard tasks, with three measured compensations for the gaps that did appear. |
 
-Not on Claude Code? Load `/fable`'s manual without the plugin: paste [`skills/fable/manual.md`](skills/fable/manual.md) into a Claude Project's instructions and set the Project's model, or load it as a system prompt over the API with [`skills/fable/fable_to_opus.py`](skills/fable/fable_to_opus.py).
+Prefer not to install the plugin? Two ways to load `/fable`'s manual by hand: paste [`skills/fable/manual.md`](skills/fable/manual.md) into a Claude Project's instructions and set the Project's model (no code), or run [`skills/fable/fable_to_opus.py`](skills/fable/fable_to_opus.py) to extract and A/B-test a manual — it drives the `claude` CLI by default (no API key) or the anthropic SDK with `--backend sdk`.
 
 Rather grow your own than use this one? [`skills/fable/PROMPT.md`](skills/fable/PROMPT.md) is the reproducible prompt kit that produced this skill — run it against whatever strong model you have, calibrated to whatever model you keep.
 

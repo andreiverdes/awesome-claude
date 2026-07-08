@@ -119,15 +119,18 @@ model runs on top of. Two ways that need no code and no subagents:
   Project instructions, and set the Project's model to your daily model. Every conversation in
   that Project now inherits the manual before it reads your task. This is the right route if you
   don't work over the API.
-- **Over the API, one script.** [`fable_to_opus.py`](fable_to_opus.py) in this folder runs Stage 1
-  for you: `python fable_to_opus.py extract` calls the donor, auto-continues if the manual runs
-  long, and saves it to `fable_handover.md`; `python fable_to_opus.py test` then runs three trap
-  prompts on the recipient bare vs. manual-loaded so you can see the difference. Both take
-  `--donor` / `--heir` flags for any strong→cheaper pair, and the script is written
-  provider-correctly for Claude Fable 5 (no `thinking`/`temperature`/prefill params, and it
-  handles a safety-classifier refusal instead of crashing on it). Read the trap results with the
-  honest caveat from `calibration.md`: a strong recipient often passes the traps unaided, and that
-  is a finding, not a failure.
+- **One script, two backends.** [`fable_to_opus.py`](fable_to_opus.py) in this folder runs Stage 1
+  for you. By default (`--backend cli`) it drives the `claude` CLI — no `pip install`, no API key,
+  using your logged-in Claude Code session — so `python fable_to_opus.py extract` writes the manual
+  to `fable_handover.md` and `python fable_to_opus.py test` runs three trap prompts on the recipient
+  bare vs. manual-loaded. `--backend sdk` drives the anthropic SDK instead (needs `pip install
+  anthropic` + `ANTHROPIC_API_KEY`, and is written provider-correctly for Fable 5 — no
+  `thinking`/`temperature`/prefill params, safety-classifier refusals handled). Both take `--donor`
+  / `--heir` for any strong→cheaper pair. Two honest caveats: read the trap results per
+  `calibration.md` (a strong recipient often passes unaided — a finding, not a failure), and for a
+  rigorous `test` prefer `--backend sdk`, because the CLI runs both arms through the Claude Code
+  agent (its own prompt and tools stay in place, and a `--system-prompt` does not cleanly replace
+  them), which muddies the bare-vs-manual comparison.
 
 Neither of these measures the gap — they load the manual and eyeball it. Stage 2 is the version
 that measures.
