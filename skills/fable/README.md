@@ -18,7 +18,13 @@ In practice it nudges the AI to:
 - not call something "done" without showing how it checked.
 
 Honest version: a strong model already does much of this on its own — in testing, the difference
-was small. So treat `/fable` as consistency-and-honesty insurance, not as a way to make a weak model
+was small. Follow-up rounds on cheaper models (blind-graded, with repeats; see the testing
+section) found the effect depends on the model and the task: it helped Claude Sonnet 5
+substantially on the one open-ended task, and on Claude Haiku 4.5 it cut both ways — consistently
+better on evidence-weighing diagnosis, consistently worse on computation-heavy decoding, net zero
+overall after the manual gained an explicit capability-floor warning (the first measurement,
+before that warning, came out clearly net-negative). So treat `/fable` as
+consistency-and-honesty insurance for mid-tier-and-up models, not as a way to make a weak model
 smart. You can install it (below), or with no setup at all paste [`manual.md`](manual.md) into a
 Claude Project and pick your model.
 
@@ -128,8 +134,9 @@ the run of the skill it had authored. Two things limit that conflict without rem
 rubrics were frozen with fixed point values before any model ran, and each run was scored before its
 reference answer was re-read (an anchoring control). That the model overrides really delivered
 Fable 5 and Opus 4.8 was checked beforehand with separate identity probes, not by anything in the
-runs themselves. Read the numbers below as a self-graded pilot; an independent re-grade by a
-different model is the obvious next step.
+runs themselves. Read the numbers below as a self-graded pilot. The obvious next step — an
+independent re-grade by a different model, blind to which run was which — has since been done, along
+with runs on cheaper models; both are reported below.
 
 ### The scores
 
@@ -174,13 +181,132 @@ rubric author's level is clamped to 25 by construction.
   for one more issue after the list feels done; check for risks that depend on context that is not
   shown; and attach the certainty label to the claim itself, not to a footnote.
 
+### The follow-up round: independent blind re-grade, and cheaper models (2026-07-09)
+
+Two days after the pilot, both of its biggest holes were tested directly. Every existing run was
+re-graded by fresh Claude Opus 4.8 graders that saw only the frozen rubric and seven anonymized,
+shuffled answers per task — no idea which answer came from which model or condition, mapping sealed
+until all grades were in. And the four tasks were run on the tier the skill is pitched at: Claude
+Haiku 4.5 and Claude Sonnet 5, bare and with the skill (fresh contexts, model identity
+smoke-checked, same frozen prompts).
+
+The blind grades, per task (/25):
+
+| Condition | Concurrency | Protocol | Design | Incident | Total (/100) |
+|------|:---:|:---:|:---:|:---:|:---:|
+| Fable 5 (reference) | 25 | 25 | 25 | 25 | **100** |
+| Opus 4.8, no skill | 22.5 | 25 | 25 | 25 | **97.5** |
+| Opus 4.8 + /fable | 21 | 25 | 25 | 25 | **96** |
+| Sonnet 5, no skill | 15 | 25 | 25 | 23 | **88** |
+| Sonnet 5 + /fable | 23.5 | 25 | 24 | 22.5 | **95** |
+| Haiku 4.5, no skill | 1 | 19 | 23 | 21 | **64** |
+| Haiku 4.5 + /fable | 0 | 17 | 22 | 15.5 | **54.5** |
+
+What it showed:
+
+- **The self-grading held up.** On the twelve cells that had pilot scores, the blind judge matched
+  nine exactly and moved the other three by at most 1.5 points, preserving the ranking — and the
+  only score it *raised* was the conflicted author's own reference answer (the pilot had docked
+  itself harder than an independent judge did). The conflict of interest was real; self-favoring
+  scores did not materialize from it.
+- **The rubric ceiling is a near-peer phenomenon.** The same tasks that clamp Fable, Opus, and
+  mostly Sonnet at 25 spread cheaper models across the full range (0–25 on the concurrency review).
+  The gap the pilot couldn't detect between near-peers is plainly visible one tier down: 97.5 vs 88
+  vs 64 bare.
+- **The skill helped Sonnet 5 — where and how it claims to.** +7 overall, all of it on the
+  open-ended review: with the manual, Sonnet found the most severe defect it had missed bare, and
+  labeled a caller-dependent hazard as conditional instead of asserting it — the exact behaviors the
+  calibration layer encodes, surfacing in a blind grade by a judge that had never seen the manual.
+- **The skill hurt Haiku 4.5 — on every task.** −9.5 overall. The failure mode was consistent:
+  the rituals without the substance. With the manual loaded, Haiku attached "(verified)" to a wrong
+  number its bare run had gotten right, and asserted known non-bugs as definite critical findings
+  (drawing fabrication penalties). For a model below some capability floor, the manual's demands
+  produce decorated overconfidence, not discipline. If you run `/fable` on a small model, measure it
+  first — this result says the default assumption should be that it does not transfer down.
+
+Same design limits as the pilot: one run per cell, no repeats, no error bars; the graders were a
+single model (Opus 4.8), blind to condition but not to writing style.
+
+**Third round (same day, with repeats).**
+<!-- see "Testing sessions at a glance" below for the round-by-round accounting --> After the table above, the calibration file gained a
+budget rule (M4: never compress a definite finding's mechanism to fit more findings) and the
+capability-floor warning below, and the shakiest cells were re-measured at three runs per cell,
+blind-graded with the earlier outputs re-graded as anchors, every grader report quote-audited
+before unblinding. Results: Opus with the revised skill scored 98.2 vs ~98 bare — the 1.5-point
+cost in the table above is gone, and the one open-ended task that caused it graded 25/24/22 across
+repeats. Haiku with the revised skill re-measured at 64.8 vs 64.3 bare — the net −9.5 above did
+not survive the revision plus repetition, but it resolved into two real, opposite effects: the
+manual consistently *hurt* Haiku on the protocol-decoding task (all three repeats, ~−5) and
+consistently *helped* it on the incident diagnosis (all three repeats, ~+3.5). Judge agreement,
+measured on 14 re-graded anchors: within 1.5 points everywhere. The floor warning stands in
+sharpened form: what reliably makes a small model worse is unearned rigor — labels without checks.
+
+### Testing sessions at a glance
+
+All measurement after the original pilot ran on 2026-07-09, in three waves, orchestrated from one
+Claude Code session (coordinator: Fable 5). **81 subagents total**, every score from a
+condition-blind grade:
+
+| Wave | What ran | Agents | Active time |
+|------|----------|:---:|:---:|
+| 1. Blind re-grade + cheaper models | 3 identity smoke tests, 16 runs (Haiku/Sonnet × bare/skill × 4 tasks), 5 Opus graders | 24 | ~30 min |
+| 2. M4 regression | 3 Opus repeats of the concurrency task with the M4 budget rule, 2 graders | 5 | ~25 min |
+| 3. Full matrix with repeats | 33 runs (9 Opus+M4, 24 Haiku bare/skill), 5 re-runs after an account session limit killed the batch mid-flight, 7 graders, 7 quote-fidelity auditors | 52 | ~40 min compute, split across the limit reset |
+
+52 fresh task runs were graded in total, plus earlier outputs re-graded as anchors in every later
+wave (14 anchor cells: judges agreed within 1.5/25 everywhere).
+
+Honesty section, because process failures are data too: of the 81 agents, one grader returned
+harness boilerplate instead of grading (re-dispatched), one grader's report was thrown out after
+un-blinding because it attributed one output's quotes to another (caught by checking quotes against
+files; every later grader was quote-audited by an independent agent before its scores were used —
+7/7 clean in wave 3), and ~14 agents died to the session limit (9 had already written valid
+output). Graders were always Opus 4.8 — an Anthropic model grading Anthropic models, blind to
+condition but not to writing style. The Sonnet rows below are still single runs on the pre-M4
+skill text; every other skill row is the current text.
+
+**Current standings** (blind-graded, /100, ordered by total; n = runs per cell):
+
+| Condition | n | Concurrency | Protocol | Design | Incident | Total |
+|------|:---:|:---:|:---:|:---:|:---:|:---:|
+| Fable 5 (reference) | 1 | 25 | 25 | 25 | 25 | **100** |
+| Opus 4.8 + /fable (M4) | 3 | 23.7 | 25 | 24.5 | 25 | **98.2** |
+| Opus 4.8, no skill | 1+anchors | 22.5–23 | 25 | 25 | 25 | **~98** |
+| Sonnet 5 + /fable (pre-M4) | 1 | 23.5 | 25 | 24 | 22.5 | **95** |
+| Sonnet 5, no skill | 1 | 15 | 25 | 25 | 23 | **88** |
+| Haiku 4.5 + /fable (current) | 3 | 8.0 | 15.5 | 20.3 | 20.9 | **64.8** |
+| Haiku 4.5, no skill | 3 | 5.8 | 20.2 | 21.0 | 17.3 | **64.3** |
+
+Row means; single-cell spread across identical repeats was up to 3 points (and ~4 where a model is
+at its floor), so treat differences under ~2 as noise.
+
+**What the skill measurably did to each model:**
+
+- **Sonnet 5 (+7):** the clearest win. With the manual it found the most severe defect of the
+  open-ended review that it had missed bare (0/5 → 5/5) and labeled a caller-dependent hazard as
+  conditional instead of asserting it — the exact behaviors M1–M3 encode, surfacing under a judge
+  that never saw the manual. Single run; not yet re-measured on the current text.
+- **Opus 4.8 (−1.5 → ≈0):** the original skill traded depth for breadth under word caps and cost
+  more than it gained; measuring that produced the M4 budget rule, after which the cost disappears
+  across all four tasks (n=3). What remains is hygiene, not score: with the skill, answers led with
+  the verdict, labeled verified-vs-assumed at the claim, and carried wider coverage.
+- **Haiku 4.5 (−9.5 → ≈0 net, split ±):** first measurement was clearly harmful — the manual's
+  labels without the manual's checks. With the current text (capability-floor warning + M4) the
+  net is zero, split into two consistent effects: ~+3.5 on evidence-weighing diagnosis in every
+  repeat, ~−5 on computation-heavy decoding in every repeat. The skill is not safe to assume
+  helpful below Sonnet class; it is task-dependent, and the failure mode to watch is decorated
+  overconfidence.
+- **The skill itself:** the eval loop improved the artifact — M4 exists because wave 1 measured
+  compression costs, and the capability-floor guidance exists because wave 1 measured Haiku's
+  failure. Both edits were then re-tested rather than assumed.
+
 ### What this does not measure
 
 Be skeptical in the right places. This was four tasks, one run per cell, with no repeated runs — so
 there is no error estimate here, and a gap of a point or two is below what this design can resolve,
 not signal. The three compensations were derived from the misses in the first pass and then tested
-on the same four tasks — in sample by construction. The one model pair measured is Fable 5 to
-Opus 4.8; the cheaper models the skill is actually pitched to help are untested. Every task was
+on the same four tasks — in sample by construction; the Sonnet 5 result is the first evidence from
+outside the model they were derived on, but still on the same four tasks. Every task was
 single-turn and fully specified — exactly the profile where a strong model needs the least help. The
 tests could not touch the situations where a real difference is most likely to live: long tasks
 where the thread drifts, work spread across many turns, deciding to check something nobody asked
