@@ -49,6 +49,12 @@ Usage for both paths — installing and using the skill, the no-code Claude Proj
 | `/git-sync` | Turn `~/.claude` into a git repo with auto-sync. Full setup guide for portable config across machines. |
 | `/sync` | One command to sync config: commit local + pull remote + rebase + push. |
 
+### Local Inference & Cost
+
+| Skill | Description |
+|-------|-------------|
+| [`/local-worker`](skills/local-worker/README.md) | Offload bounded grunt work (scouting, summaries, docstrings, mechanical edits) from Claude Code to a local model under LM Studio or Ollama via the `pi` agent — cutting frontier tokens. The worker runs strictly local: isolated config, pinned provider, scrubbed environment, no frontier credentials. |
+
 ## Contributing
 
 PRs welcome. Each skill lives in `skills/<skill-name>/SKILL.md`. See the [agentskills.io spec](https://agentskills.io/specification) for the skill format.
