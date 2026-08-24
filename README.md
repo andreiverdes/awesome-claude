@@ -42,6 +42,12 @@ Usage for both paths — installing and using the skill, the no-code Claude Proj
 |-------|-------------|
 | `/intellij-plugin` | IntelliJ platform plugin development guide. |
 
+### Architecture & Documentation
+
+| Skill | Description |
+|-------|-------------|
+| `/mosby` | Turn any codebase into an interactive 3D architecture visualization — a Three.js city where buildings are components, traffic is flows, with a toggle to a clean UML-style diagram. Ships a complete working template (dual themes, flow player, city/diagram modes) plus the recon → content model → adapt → browser-verify workflow. Single self-contained HTML, zero network. |
+
 ### Claude Code Config
 
 | Skill | Description |
