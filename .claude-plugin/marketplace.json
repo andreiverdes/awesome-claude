@@ -13,7 +13,7 @@
         "source": "github",
         "repo": "andreiverdes/awesome-claude"
       },
-      "description": "A collection of open-source skills for Claude Code, including /fable (an operating manual for reasoning), /mosby (3D architecture visualizations), /mobile-app-builder, /web-dev, /shadcn, /intellij-plugin, and config helpers."
+      "description": "A collection of open-source skills for Claude Code, including /crisp (a writing protocol: say it once, then stop), /fable (an operating manual for reasoning), /mosby (3D architecture visualizations), /mobile-app-builder, /web-dev, /shadcn, /intellij-plugin, and config helpers."
     }
   ]
 }

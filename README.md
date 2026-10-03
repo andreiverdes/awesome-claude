@@ -22,6 +22,12 @@ The skills become available in your next Claude Code session. Update later with
 
 Usage for both paths — installing and using the skill, the no-code Claude Project route, and building your own with runnable samples — is in [`skills/fable/README.md`](skills/fable/README.md).
 
+### Writing & Communication
+
+| Skill | Description |
+|-------|-------------|
+| [`/crisp`](skills/crisp/SKILL.md) | A writing protocol for humans and LLMs: say the useful thing once, as clearly as possible, then stop. Ten checkable rules, three depth levels, a crispify pass, and an installer that puts the directive in `AGENTS.md`/`CLAUDE.md`. Benchmarked blind against a no-prompt baseline on 10 prompts × 3 samples: −47% tokens, 21/30 pairings won, 97% of required facts kept ([dashboard](https://andreiverdes.github.io/crisp/), [full protocol + research](https://github.com/andreiverdes/crisp)). |
+
 ### App Development
 
 | Skill | Description |
