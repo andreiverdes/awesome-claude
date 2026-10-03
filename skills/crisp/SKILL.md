@@ -4,8 +4,8 @@ description: CRISP writing protocol (Concise · Relevant · Intuitive · Simple 
 ---
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/andreiverdes/crisp/main/docs/hero-dark-946998b3.svg">
-  <img alt="CRISP: say the useful thing once, as clearly as possible, then stop." src="https://raw.githubusercontent.com/andreiverdes/crisp/main/docs/hero-light-fa59e20d.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/andreiverdes/crisp/main/web/hero-dark-946998b3.svg">
+  <img alt="CRISP: say the useful thing once, as clearly as possible, then stop." src="https://raw.githubusercontent.com/andreiverdes/crisp/main/web/hero-light-fa59e20d.svg" width="100%">
 </picture>
 
 # CRISP
@@ -85,7 +85,7 @@ Ideas before words: steps 2-3 come before step 6.
 
 ## Install into a project
 
-`scripts/install.py` puts a CRISP block into the project's `AGENTS.md` and `CLAUDE.md` so every agent in that repo replies in CRISP, with or without this skill. Run from the project root; from the plugin the script lives at `~/.claude/plugins/marketplaces/awesome-claude/skills/crisp/scripts/install.py`.
+`scripts/install.py` puts a CRISP block into the project's `AGENTS.md` and `CLAUDE.md` so every agent in that repo replies in CRISP, with or without this skill. Run from the project root; from the plugin the script lives at `~/.claude/plugins/marketplaces/crisp/skills/crisp/scripts/install.py` (or `marketplaces/awesome-claude/...` if installed from that collection).
 
 | Flag | Effect | Default |
 |---|---|---|
@@ -102,4 +102,4 @@ The block sits between `<!-- crisp:start -->` and `<!-- crisp:end -->` and is re
 
 - `prompts/crisp.md` (80 words), `crisp-minimal.md` (200), `crisp-full.md` (590): system prompts; `crispify.md`: the rewrite variant.
 - `reference/anti-patterns.md`: 48 AI-writing habits with fixes. `reference/examples.md`: 12 before/after pairs by domain.
-- Full protocol, research, and benchmark: [github.com/andreiverdes/crisp](https://github.com/andreiverdes/crisp) · dashboard: [andreiverdes.github.io/crisp](https://andreiverdes.github.io/crisp/).
+- Full protocol, research, and benchmark: [github.com/andreiverdes/crisp](https://github.com/andreiverdes/crisp) · dashboard: [andreiverdes.github.io/crisp/benchmark](https://andreiverdes.github.io/crisp/benchmark/).
