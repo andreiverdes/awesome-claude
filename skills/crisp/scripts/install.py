@@ -84,10 +84,11 @@ def targets(explicit: str | None, root: pathlib.Path) -> list[pathlib.Path]:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--file", help="target file (default: AGENTS.md and CLAUDE.md in cwd)")
-    ap.add_argument("--level", choices=LEVELS, default="crisp")
+    ap.add_argument("--level", choices=LEVELS, default="crisp",
+                    help="which prompt to embed: crisp (80 words, default), minimal (200), full (590)")
     ap.add_argument("--command", action="store_true", help=f"also write {COMMAND} for a /crisp slash command")
     ap.add_argument("--print", action="store_true", help="print the block, change nothing")
-    ap.add_argument("--remove", action="store_true")
+    ap.add_argument("--remove", action="store_true", help="remove the block (and the command file with --command)")
     ap.add_argument("--check", action="store_true", help="exit 0 if present and current, 1 otherwise")
     a = ap.parse_args()
 

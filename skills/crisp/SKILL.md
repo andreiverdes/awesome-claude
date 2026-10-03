@@ -83,9 +83,23 @@ Ideas before words: steps 2-3 come before step 6.
 13. Did I keep the code, corrections, risks, and real uncertainty?
 14. Did I stop?
 
+## Install into a project
+
+`scripts/install.py` puts a CRISP block into the project's `AGENTS.md` and `CLAUDE.md` so every agent in that repo replies in CRISP, with or without this skill. Run from the project root; from the plugin the script lives at `~/.claude/plugins/marketplaces/awesome-claude/skills/crisp/scripts/install.py`.
+
+| Flag | Effect | Default |
+|---|---|---|
+| `--level crisp\|minimal\|full` | Prompt to embed: `crisp` 80 words (benchmarked), `minimal` 200 (adds ban-list, vague-word swaps, formatting rules), `full` 590 (adds priorities, ambiguity rules, length table, the pass) | `crisp` |
+| `--file PATH` | One target file | `AGENTS.md` and `CLAUDE.md` if present; else creates `AGENTS.md` |
+| `--command` | Also write `.claude/commands/crisp.md` so `/crisp [1\|2\|3\|text]` works without the plugin | off |
+| `--print` | Print the block, change nothing | |
+| `--check` | Exit 0 if present and current, 1 if missing or stale | |
+| `--remove` | Remove the block (and the command file with `--command`) | |
+
+The block sits between `<!-- crisp:start -->` and `<!-- crisp:end -->` and is replaced in place on re-run; nothing outside it changes. Pick `minimal` when the model keeps a specific habit the short prompt doesn't name; `full` when compliance is worth ~600 tokens a turn.
+
 ## Files
 
-- `prompts/crisp.md`: the 80-word `/crisp` injection. `prompts/crisp-minimal.md` (200 words) and `prompts/crisp-full.md` (590 words): system prompts for when context is tight or compliance matters most. `prompts/crispify.md`: the rewrite variant.
-- `reference/anti-patterns.md`: the catalog of AI-writing habits with fixes. `reference/examples.md`: before/after pairs by domain.
-- `scripts/install.py`: adds a CRISP block to the project's `AGENTS.md` and `CLAUDE.md` so every agent in the repo replies in CRISP. `python3 scripts/install.py` (flags: `--file`, `--level crisp|minimal|full`, `--command` to also create `.claude/commands/crisp.md`, `--remove`, `--check`, `--print`).
-- Full protocol with research, rules, examples, and benchmark: [https://github.com/andreiverdes/crisp](https://github.com/andreiverdes/crisp) (`CRISP.md`).
+- `prompts/crisp.md` (80 words), `crisp-minimal.md` (200), `crisp-full.md` (590): system prompts; `crispify.md`: the rewrite variant.
+- `reference/anti-patterns.md`: 48 AI-writing habits with fixes. `reference/examples.md`: 12 before/after pairs by domain.
+- Full protocol, research, and benchmark: [github.com/andreiverdes/crisp](https://github.com/andreiverdes/crisp) · dashboard: [andreiverdes.github.io/crisp](https://andreiverdes.github.io/crisp/).
