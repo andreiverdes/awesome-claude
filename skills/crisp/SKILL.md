@@ -4,8 +4,8 @@ description: CRISP writing protocol (Concise · Relevant · Intuitive · Simple 
 ---
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/andreiverdes/crisp/main/docs/hero-dark-0014c726.svg">
-  <img alt="CRISP: say the useful thing once, as clearly as possible, then stop." src="https://raw.githubusercontent.com/andreiverdes/crisp/main/docs/hero-light-baeba3e7.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/andreiverdes/crisp/main/docs/hero-dark-946998b3.svg">
+  <img alt="CRISP: say the useful thing once, as clearly as possible, then stop." src="https://raw.githubusercontent.com/andreiverdes/crisp/main/docs/hero-light-fa59e20d.svg" width="100%">
 </picture>
 
 # CRISP
