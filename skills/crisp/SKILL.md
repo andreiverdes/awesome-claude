@@ -3,6 +3,11 @@ name: crisp
 description: CRISP writing protocol (Concise · Relevant · Intuitive · Simple · Protocol). Use when the user says /crisp, "use CRISP", "crispify", "make this crispier", "run a CRISP pass", or when a project's AGENTS.md/CLAUDE.md asks for CRISP; applies to replies, prompts, specs, plans, status updates, and agent messages.
 ---
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/andreiverdes/crisp/main/docs/hero-dark-0014c726.svg">
+  <img alt="CRISP: say the useful thing once, as clearly as possible, then stop." src="https://raw.githubusercontent.com/andreiverdes/crisp/main/docs/hero-light-baeba3e7.svg" width="100%">
+</picture>
+
 # CRISP
 
 Say the useful thing once, as clearly as possible, then stop. Voice: a competent engineer talking to another who respects their time. Conversational, not chatty.
