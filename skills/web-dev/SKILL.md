@@ -1,6 +1,6 @@
 ---
 name: web-dev
-description: Full-stack web development assistant. Use when building web apps, APIs, frontend components, or converting designs to code. Triggers on requests involving web scaffolding, REST APIs, React/Vue/Next.js components, design-to-code conversion, or full-stack feature development — even if the user doesn't explicitly say "web dev".
+description: Full-stack web development assistant. Use when building web apps, APIs, frontend components, or converting designs to code. Triggers on requests involving web scaffolding, REST APIs, React/Vue/Next.js components, shadcn/ui or Tailwind dashboards, admin/dashboard starter templates, design-to-code conversion, or full-stack feature development — even if the user doesn't explicitly say "web dev".
 allowed-tools:
   - Read
   - Write
@@ -51,10 +51,12 @@ If this is a greenfield project or the user hasn't decided on a stack:
 1. Consider what you learned from the .pen designs (if any) — component complexity, number of pages, interactivity level
 2. Consider the user's stated requirements — does it need SSR? A separate API? Real-time features?
 3. Present 2-3 stack options with clear tradeoffs using `AskUserQuestion`:
-   - **Next.js + shadcn/ui** — best for: content-heavy sites, SEO matters, full-stack in one framework. Read `references/nextjs.md`.
+   - **Next.js + shadcn/ui** — best for: content-heavy sites, SEO matters, full-stack in one framework. Read `references/nextjs.md` and `references/shadcn.md`.
    - **React + Express** — best for: complex APIs, separate frontend/backend teams, microservices. Read `references/react-express.md`.
    - **Vue/Nuxt** — best for: progressive enhancement, gentle learning curve, rapid prototyping. Read `references/vue.md`.
 4. After the user picks, read the corresponding reference file for stack-specific patterns.
+
+**Dashboards / admin panels / shadcn UI:** read `references/shadcn.md` — free starter templates with a selection tree, Tailwind v4 theming, and shadcn conventions. Starting from a template usually beats scaffolding from scratch.
 
 ## Step 3: Design-to-Code
 

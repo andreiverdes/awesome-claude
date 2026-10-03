@@ -14,14 +14,6 @@ The skills become available in your next Claude Code session. Update later with
 
 ## Skills
 
-### Reasoning Discipline
-
-| Skill | Description |
-|-------|-------------|
-| [`/fable`](skills/fable/README.md) | An operating manual for reasoning, written by Claude Fable 5 as a handoff of craft to successor models: eight procedures that replace the feeling of being right with checks, a five-question pre-send self-test, and a calibration layer grounded in a small self-graded pilot rather than assumed — on four single-turn hard tasks, Opus 4.8 with no skill showed no gap the pilot could resolve, with three (n=1) compensations for the gaps that did appear. |
-
-Usage for both paths — installing and using the skill, the no-code Claude Project route, and building your own with runnable samples — is in [`skills/fable/README.md`](skills/fable/README.md).
-
 ### Writing & Communication
 
 | Skill | Description |
@@ -33,14 +25,7 @@ Usage for both paths — installing and using the skill, the no-code Claude Proj
 | Skill | Description |
 |-------|-------------|
 | `/mobile-app-builder` | Production-ready mobile app scaffolding (iOS, Android, cross-platform). Covers SwiftUI, Jetpack Compose, Flutter, Compose Multiplatform, and Expo + HeroUI. Includes validation, onboarding, monetization, and go-to-market strategy. |
-| `/web-dev` | Full-stack web development assistant. React, Vue, Next.js, APIs, design-to-code conversion. |
-
-### UI & Design
-
-| Skill | Description |
-|-------|-------------|
-| `/shadcn` | Build UIs with shadcn/ui and Tailwind CSS. |
-| `/shadcn-dashboard-template` | Dashboard and landing page templates with shadcn. |
+| `/web-dev` | Full-stack web development assistant. React, Vue, Next.js, APIs, design-to-code conversion. Includes a shadcn/ui reference: free dashboard templates, Tailwind v4 theming, conventions. |
 
 ### IDE & Tooling
 

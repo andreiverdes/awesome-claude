@@ -1,8 +1,11 @@
+---
+name: intellij-plugin
+description: Use when creating, modifying, or debugging an IntelliJ IDEA / JetBrains / Android Studio plugin with the IntelliJ Platform SDK, Kotlin, and IntelliJ Platform Gradle Plugin 2.x. Triggers on plugin.xml, ToolWindowFactory, AnAction, services, EDT/threading, or IntelliJ UI components.
+---
+
 # IntelliJ Plugin Development
 
 Expert skill for building IntelliJ IDEA / Android Studio plugins using the IntelliJ Platform SDK, Kotlin, and Gradle Plugin 2.x.
-
-TRIGGER when: user asks to create, modify, or debug an IntelliJ plugin, JetBrains plugin, or Android Studio plugin. Also triggers on mentions of plugin.xml, ToolWindowFactory, AnAction, or IntelliJ Platform SDK.
 
 ## Build Setup (IntelliJ Platform Gradle Plugin 2.x)
 
